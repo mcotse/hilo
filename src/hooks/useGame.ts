@@ -1,10 +1,8 @@
 import { useReducer, useCallback, useEffect } from 'react'
 import { gameReducer, initialState } from '@/engine/game-state'
 import { selectPair } from '@/engine/pairing'
-import { items } from '@/data/items'
-import { categories } from '@/data/categories'
 import { getRecord, setRecord } from '@/lib/storage'
-import type { Category, StreakTier } from '@/engine/types'
+import type { Item, Category, StreakTier } from '@/engine/types'
 
 export function getStreakTier(streak: number): StreakTier {
   if (streak >= 10) return 'fire'
@@ -13,7 +11,7 @@ export function getStreakTier(streak: number): StreakTier {
   return 'calm'
 }
 
-export function useGame() {
+export function useGame(items: Item[], categories: Category[]) {
   const [state, dispatch] = useReducer(gameReducer, {
     ...initialState,
     record: getRecord(),
@@ -46,12 +44,12 @@ export function useGame() {
     const category = categories[Math.floor(Math.random() * categories.length)]
     const pair = selectPair(items, category, 0, [])
     dispatch({ type: 'START_GAME', category, pair })
-  }, [])
+  }, [items, categories])
 
   const startGameWithCategory = useCallback((category: Category) => {
     const pair = selectPair(items, category, 0, [])
     dispatch({ type: 'START_GAME', category, pair })
-  }, [])
+  }, [items])
 
   const choose = useCallback((choice: 'higher' | 'lower') => {
     dispatch({ type: 'CHOOSE', choice })
@@ -65,7 +63,7 @@ export function useGame() {
       const pair = selectPair(items, state.category, state.streak + 1, state.history)
       dispatch({ type: 'NEXT_ROUND', pair })
     }
-  }, [state.category, state.streak, state.history])
+  }, [items, state.category, state.streak, state.history])
 
   const reset = useCallback(() => {
     dispatch({ type: 'RESET' })

@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useState, useMemo, useCallback } from 'react'
+import { useQuery } from 'convex/react'
+import { api } from '../convex/_generated/api'
 import { AnimatePresence } from 'motion/react'
 import { GameShell } from '@/components/GameShell'
 import { TopBar } from '@/components/TopBar'
@@ -9,7 +11,10 @@ import { StartScreen } from '@/components/StartScreen'
 import { RevealSequence } from '@/components/RevealSequence'
 import { GameOverOverlay } from '@/components/GameOverOverlay'
 import { PauseOverlay } from '@/components/PauseOverlay'
+import { DisputeSheet } from '@/components/DisputeSheet'
 import { useGame } from '@/hooks/useGame'
+import { createFormatValue } from '@/lib/formatValue'
+import type { Item, Category } from '@/engine/types'
 
 function HigherLowerButtons({
   onHigher,
@@ -81,6 +86,49 @@ function HigherLowerButtons({
 }
 
 function App() {
+  // Fetch data from Convex
+  const rawCategories = useQuery(api.categories.listEnabled)
+  const rawItems = useQuery(api.items.listAll)
+
+  // Transform Convex categories to game Category type
+  const categories: Category[] = useMemo(() => {
+    if (!rawCategories) return []
+    return rawCategories.map((cat) => ({
+      id: cat._id,
+      label: cat.label,
+      question: cat.question,
+      metricKey: cat.metricKey,
+      color: cat.color,
+      formatValue: createFormatValue(cat.formatPattern),
+    }))
+  }, [rawCategories])
+
+  // Transform Convex items to game Item type + build factId lookup map
+  const { items, factIdMap } = useMemo(() => {
+    if (!rawItems) return { items: [] as Item[], factIdMap: new Map<string, string>() }
+    const map = new Map<string, string>()
+    const gameItems = rawItems.map((item) => {
+      const facts: Record<string, { value: number; unit: string; source: string; asOf?: string }> = {}
+      for (const fact of item.facts) {
+        facts[fact.metricKey] = {
+          value: fact.value,
+          unit: fact.unit,
+          source: fact.source,
+          ...(fact.asOf ? { asOf: fact.asOf } : {}),
+        }
+        // key: "itemSlug|metricKey" -> Convex fact _id
+        map.set(`${item.slug}|${fact.metricKey}`, fact._id)
+      }
+      return {
+        id: item.slug,
+        name: item.name,
+        emoji: item.emoji,
+        facts,
+      }
+    })
+    return { items: gameItems, factIdMap: map }
+  }, [rawItems])
+
   const {
     state,
     anchor,
@@ -92,9 +140,38 @@ function App() {
     completeReveal,
     reset,
     quit,
-  } = useGame()
+  } = useGame(items, categories)
 
   const [paused, setPaused] = useState(false)
+  const [disputeFactId, setDisputeFactId] = useState<string | null>(null)
+
+  // Look up a factId from an item slug and the current metricKey
+  const openDispute = useCallback((itemSlug: string) => {
+    if (!state.category) return
+    const key = `${itemSlug}|${state.category.metricKey}`
+    const factId = factIdMap.get(key)
+    if (factId) setDisputeFactId(factId)
+  }, [state.category, factIdMap])
+
+  // Show loading while Convex data is loading
+  if (!rawCategories || !rawItems) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100dvh',
+          background: '#0a0a0f',
+          color: 'rgba(255, 255, 255, 0.4)',
+          fontFamily: "'Space Grotesk', sans-serif",
+          fontSize: '16px',
+        }}
+      >
+        Loading...
+      </div>
+    )
+  }
 
   if (state.phase === 'start') {
     return <StartScreen record={state.record} onPlay={startGame} />
@@ -119,10 +196,22 @@ function App() {
         anchorKey={anchor.id}
         challengerKey={challenger.id}
         anchorCard={
-          <Card item={anchor} category={state.category} variant="anchor" />
+          <Card
+            item={anchor}
+            category={state.category}
+            variant="anchor"
+            showFlag={state.phase === 'revealing' || state.phase === 'game_over'}
+            onFlag={() => openDispute(anchor.id)}
+          />
         }
         challengerCard={
-          <Card item={challenger} category={state.category} variant="challenger">
+          <Card
+            item={challenger}
+            category={state.category}
+            variant="challenger"
+            showFlag={state.phase === 'revealing' || state.phase === 'game_over'}
+            onFlag={() => openDispute(challenger.id)}
+          >
             {state.phase === 'comparing' && (
               <HigherLowerButtons
                 onHigher={() => choose('higher')}
@@ -179,6 +268,21 @@ function App() {
           onPlayAgain={reset}
         />
       )}
+
+      {disputeFactId && state.category && (() => {
+        // Determine which item is being disputed by reverse-looking up the factId
+        const anchorFactId = factIdMap.get(`${anchor.id}|${state.category!.metricKey}`)
+        const disputedItem = disputeFactId === anchorFactId ? anchor : challenger
+        const fact = disputedItem.facts[state.category!.metricKey]
+        return (
+          <DisputeSheet
+            factId={disputeFactId}
+            itemName={disputedItem.name}
+            formattedValue={fact ? state.category!.formatValue(fact.value) : ''}
+            onClose={() => setDisputeFactId(null)}
+          />
+        )
+      })()}
     </GameShell>
   )
 }
