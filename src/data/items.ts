@@ -554,4 +554,688 @@ export const items: Item[] = [
       rotten_tomatoes: { value: 84, unit: '%', source: 'Rotten Tomatoes', asOf: '2024' },
     },
   },
+
+  // === ANIMALS — TOP SPEED ===
+  {
+    id: 'cheetah',
+    name: 'Cheetah',
+    emoji: '🐆',
+    facts: {
+      top_speed: { value: 70, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'peregrine-falcon',
+    name: 'Peregrine Falcon',
+    emoji: '🦅',
+    facts: {
+      top_speed: { value: 240, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'lion',
+    name: 'Lion',
+    emoji: '🦁',
+    facts: {
+      top_speed: { value: 50, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'grizzly-bear',
+    name: 'Grizzly Bear',
+    emoji: '🐻',
+    facts: {
+      top_speed: { value: 35, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'usain-bolt',
+    name: 'Usain Bolt',
+    emoji: '🏃',
+    facts: {
+      top_speed: { value: 28, unit: 'mph', source: 'World Athletics', asOf: '2024' },
+    },
+  },
+  {
+    id: 'horse',
+    name: 'Horse',
+    emoji: '🐎',
+    facts: {
+      top_speed: { value: 55, unit: 'mph', source: 'Guinness World Records', asOf: '2024' },
+    },
+  },
+  {
+    id: 'greyhound',
+    name: 'Greyhound',
+    emoji: '🐕',
+    facts: {
+      top_speed: { value: 45, unit: 'mph', source: 'American Kennel Club', asOf: '2024' },
+    },
+  },
+  {
+    id: 'dolphin',
+    name: 'Dolphin',
+    emoji: '🐬',
+    facts: {
+      top_speed: { value: 37, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'sailfish',
+    name: 'Sailfish',
+    emoji: '🐟',
+    facts: {
+      top_speed: { value: 68, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'black-mamba',
+    name: 'Black Mamba',
+    emoji: '🐍',
+    facts: {
+      top_speed: { value: 12, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'ostrich',
+    name: 'Ostrich',
+    emoji: '🦩',
+    facts: {
+      top_speed: { value: 45, unit: 'mph', source: 'San Diego Zoo', asOf: '2024' },
+    },
+  },
+  {
+    id: 'kangaroo',
+    name: 'Kangaroo',
+    emoji: '🦘',
+    facts: {
+      top_speed: { value: 44, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'elephant',
+    name: 'Elephant',
+    emoji: '🐘',
+    facts: {
+      top_speed: { value: 25, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'hippo',
+    name: 'Hippo',
+    emoji: '🦛',
+    facts: {
+      top_speed: { value: 19, unit: 'mph', source: 'San Diego Zoo', asOf: '2024' },
+    },
+  },
+  {
+    id: 'crocodile',
+    name: 'Crocodile',
+    emoji: '🐊',
+    facts: {
+      top_speed: { value: 22, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'rabbit',
+    name: 'Rabbit',
+    emoji: '🐇',
+    facts: {
+      top_speed: { value: 35, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'house-cat',
+    name: 'House Cat',
+    emoji: '🐱',
+    facts: {
+      top_speed: { value: 30, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'chicken',
+    name: 'Chicken',
+    emoji: '🐔',
+    facts: {
+      top_speed: { value: 9, unit: 'mph', source: 'Smithsonian', asOf: '2024' },
+    },
+  },
+  {
+    id: 'pig',
+    name: 'Pig',
+    emoji: '🐷',
+    facts: {
+      top_speed: { value: 11, unit: 'mph', source: 'Smithsonian', asOf: '2024' },
+    },
+  },
+  {
+    id: 'sloth',
+    name: 'Sloth',
+    emoji: '🦥',
+    facts: {
+      top_speed: { value: 0.15, unit: 'mph', source: 'World Wildlife Fund', asOf: '2024' },
+    },
+  },
+  {
+    id: 'tortoise',
+    name: 'Tortoise',
+    emoji: '🐢',
+    facts: {
+      top_speed: { value: 0.3, unit: 'mph', source: 'Guinness World Records', asOf: '2024' },
+    },
+  },
+  {
+    id: 'great-white-shark',
+    name: 'Great White Shark',
+    emoji: '🦈',
+    facts: {
+      top_speed: { value: 35, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'moose',
+    name: 'Moose',
+    emoji: '🫎',
+    facts: {
+      top_speed: { value: 35, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'giraffe',
+    name: 'Giraffe',
+    emoji: '🦒',
+    facts: {
+      top_speed: { value: 37, unit: 'mph', source: 'San Diego Zoo', asOf: '2024' },
+    },
+  },
+  {
+    id: 'wolf',
+    name: 'Wolf',
+    emoji: '🐺',
+    facts: {
+      top_speed: { value: 40, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'coyote',
+    name: 'Coyote',
+    emoji: '🐺',
+    facts: {
+      top_speed: { value: 43, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'red-fox',
+    name: 'Red Fox',
+    emoji: '🦊',
+    facts: {
+      top_speed: { value: 30, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'bald-eagle',
+    name: 'Bald Eagle',
+    emoji: '🦅',
+    facts: {
+      top_speed: { value: 100, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'hummingbird',
+    name: 'Hummingbird',
+    emoji: '🐦',
+    facts: {
+      top_speed: { value: 30, unit: 'mph', source: 'Cornell Lab of Ornithology', asOf: '2024' },
+    },
+  },
+  {
+    id: 'cobra',
+    name: 'Cobra',
+    emoji: '🐍',
+    facts: {
+      top_speed: { value: 12, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'chimpanzee',
+    name: 'Chimpanzee',
+    emoji: '🐒',
+    facts: {
+      top_speed: { value: 25, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'brown-bear',
+    name: 'Brown Bear',
+    emoji: '🐻',
+    facts: {
+      top_speed: { value: 30, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'polar-bear',
+    name: 'Polar Bear',
+    emoji: '🐻‍❄️',
+    facts: {
+      top_speed: { value: 25, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'african-wild-dog',
+    name: 'African Wild Dog',
+    emoji: '🐕',
+    facts: {
+      top_speed: { value: 44, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'pronghorn-antelope',
+    name: 'Pronghorn Antelope',
+    emoji: '🦌',
+    facts: {
+      top_speed: { value: 55, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'wildebeest',
+    name: 'Wildebeest',
+    emoji: '🐃',
+    facts: {
+      top_speed: { value: 50, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'garden-snail',
+    name: 'Garden Snail',
+    emoji: '🐌',
+    facts: {
+      top_speed: { value: 0.03, unit: 'mph', source: 'Guinness World Records', asOf: '2024' },
+    },
+  },
+  {
+    id: 'komodo-dragon',
+    name: 'Komodo Dragon',
+    emoji: '🦎',
+    facts: {
+      top_speed: { value: 13, unit: 'mph', source: 'Smithsonian', asOf: '2024' },
+    },
+  },
+  {
+    id: 'domestic-dog-average',
+    name: 'Domestic Dog (Average)',
+    emoji: '🐶',
+    facts: {
+      top_speed: { value: 20, unit: 'mph', source: 'American Kennel Club', asOf: '2024' },
+    },
+  },
+  {
+    id: 'iguana',
+    name: 'Iguana',
+    emoji: '🦎',
+    facts: {
+      top_speed: { value: 21, unit: 'mph', source: 'San Diego Zoo', asOf: '2024' },
+    },
+  },
+  {
+    id: 'zebra',
+    name: 'Zebra',
+    emoji: '🦓',
+    facts: {
+      top_speed: { value: 40, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'penguin',
+    name: 'Penguin',
+    emoji: '🐧',
+    facts: {
+      top_speed: { value: 22, unit: 'mph', source: 'National Geographic', asOf: '2024' },
+    },
+  },
+  {
+    id: 'squirrel',
+    name: 'Squirrel',
+    emoji: '🐿️',
+    facts: {
+      top_speed: { value: 20, unit: 'mph', source: 'National Wildlife Federation', asOf: '2024' },
+    },
+  },
+
+  // === MONEY — AVERAGE PRICE ===
+  {
+    id: 'iphone-16-pro',
+    name: 'iPhone 16 Pro',
+    emoji: '📱',
+    facts: {
+      average_price: { value: 1199, unit: '$', source: 'Apple', asOf: '2024' },
+    },
+  },
+  {
+    id: 'macbook-pro',
+    name: 'MacBook Pro',
+    emoji: '💻',
+    facts: {
+      average_price: { value: 1999, unit: '$', source: 'Apple', asOf: '2024' },
+    },
+  },
+  {
+    id: 'tesla-model-3',
+    name: 'Tesla Model 3',
+    emoji: '🚗',
+    facts: {
+      average_price: { value: 38990, unit: '$', source: 'Tesla', asOf: '2024' },
+    },
+  },
+  {
+    id: 'toyota-camry',
+    name: 'Toyota Camry',
+    emoji: '🚙',
+    facts: {
+      average_price: { value: 28855, unit: '$', source: 'Toyota', asOf: '2024' },
+    },
+  },
+  {
+    id: 'cup-of-coffee',
+    name: 'Cup of Coffee',
+    emoji: '☕',
+    facts: {
+      average_price: { value: 5.50, unit: '$', source: 'National Coffee Association', asOf: '2024' },
+    },
+  },
+  {
+    id: 'netflix-monthly',
+    name: 'Netflix Monthly',
+    emoji: '📺',
+    facts: {
+      average_price: { value: 15.49, unit: '$', source: 'Netflix', asOf: '2024' },
+    },
+  },
+  {
+    id: 'gallon-of-gas',
+    name: 'Gallon of Gas',
+    emoji: '⛽',
+    facts: {
+      average_price: { value: 3.50, unit: '$', source: 'AAA Gas Prices', asOf: '2024' },
+    },
+  },
+  {
+    id: 'dozen-eggs',
+    name: 'Dozen Eggs',
+    emoji: '🥚',
+    facts: {
+      average_price: { value: 4.50, unit: '$', source: 'USDA Average Retail Price', asOf: '2024' },
+    },
+  },
+  {
+    id: 'costco-hot-dog',
+    name: 'Costco Hot Dog',
+    emoji: '🌭',
+    facts: {
+      average_price: { value: 1.50, unit: '$', source: 'Costco', asOf: '2024' },
+    },
+  },
+  {
+    id: 'movie-ticket',
+    name: 'Movie Ticket',
+    emoji: '🎟️',
+    facts: {
+      average_price: { value: 11.00, unit: '$', source: 'National Association of Theatre Owners', asOf: '2024' },
+    },
+  },
+  {
+    id: 'pair-of-levis',
+    name: 'Pair of Levis',
+    emoji: '👖',
+    facts: {
+      average_price: { value: 69, unit: '$', source: "Levi's", asOf: '2024' },
+    },
+  },
+  {
+    id: 'nike-air-max',
+    name: 'Nike Air Max',
+    emoji: '👟',
+    facts: {
+      average_price: { value: 130, unit: '$', source: 'Nike', asOf: '2024' },
+    },
+  },
+  {
+    id: 'airpods-pro',
+    name: 'AirPods Pro',
+    emoji: '🎧',
+    facts: {
+      average_price: { value: 249, unit: '$', source: 'Apple', asOf: '2024' },
+    },
+  },
+  {
+    id: 'ps5',
+    name: 'PS5',
+    emoji: '🎮',
+    facts: {
+      average_price: { value: 499, unit: '$', source: 'Sony', asOf: '2024' },
+    },
+  },
+  {
+    id: 'nintendo-switch',
+    name: 'Nintendo Switch',
+    emoji: '🎮',
+    facts: {
+      average_price: { value: 299, unit: '$', source: 'Nintendo', asOf: '2024' },
+    },
+  },
+  {
+    id: 'broadway-ticket',
+    name: 'Broadway Ticket',
+    emoji: '🎭',
+    facts: {
+      average_price: { value: 150, unit: '$', source: 'Broadway League', asOf: '2024' },
+    },
+  },
+  {
+    id: 'disneyland-ticket',
+    name: 'Disneyland Ticket',
+    emoji: '🏰',
+    facts: {
+      average_price: { value: 104, unit: '$', source: 'Disneyland', asOf: '2024' },
+    },
+  },
+  {
+    id: 'rolex-submariner',
+    name: 'Rolex Submariner',
+    emoji: '⌚',
+    facts: {
+      average_price: { value: 10100, unit: '$', source: 'Rolex', asOf: '2024' },
+    },
+  },
+  {
+    id: 'ray-ban-wayfarers',
+    name: 'Ray-Ban Wayfarers',
+    emoji: '🕶️',
+    facts: {
+      average_price: { value: 163, unit: '$', source: 'Ray-Ban', asOf: '2024' },
+    },
+  },
+  {
+    id: 'spotify-monthly',
+    name: 'Spotify Monthly',
+    emoji: '🎵',
+    facts: {
+      average_price: { value: 11.99, unit: '$', source: 'Spotify', asOf: '2024' },
+    },
+  },
+  {
+    id: 'uber-ride-average',
+    name: 'Uber Ride Average',
+    emoji: '🚕',
+    facts: {
+      average_price: { value: 25, unit: '$', source: 'Uber', asOf: '2024' },
+    },
+  },
+  {
+    id: 'gym-membership-monthly',
+    name: 'Gym Membership Monthly',
+    emoji: '💪',
+    facts: {
+      average_price: { value: 53, unit: '$', source: 'IHRSA', asOf: '2024' },
+    },
+  },
+  {
+    id: 'costco-membership',
+    name: 'Costco Membership',
+    emoji: '🛒',
+    facts: {
+      average_price: { value: 65, unit: '$', source: 'Costco', asOf: '2024' },
+    },
+  },
+  {
+    id: 'amazon-prime-annual',
+    name: 'Amazon Prime Annual',
+    emoji: '📦',
+    facts: {
+      average_price: { value: 139, unit: '$', source: 'Amazon', asOf: '2024' },
+    },
+  },
+  {
+    id: 'wedding-average',
+    name: 'Wedding Average',
+    emoji: '💒',
+    facts: {
+      average_price: { value: 33000, unit: '$', source: 'The Knot', asOf: '2024' },
+    },
+  },
+  {
+    id: 'college-textbook',
+    name: 'College Textbook',
+    emoji: '📚',
+    facts: {
+      average_price: { value: 105, unit: '$', source: 'College Board', asOf: '2024' },
+    },
+  },
+  {
+    id: 'starbucks-latte',
+    name: 'Starbucks Latte',
+    emoji: '☕',
+    facts: {
+      average_price: { value: 5.75, unit: '$', source: 'Starbucks Menu', asOf: '2024' },
+    },
+  },
+  {
+    id: 'avocado',
+    name: 'Avocado',
+    emoji: '🥑',
+    facts: {
+      average_price: { value: 1.50, unit: '$', source: 'USDA Average Retail Price', asOf: '2024' },
+    },
+  },
+  {
+    id: 'gallon-of-milk',
+    name: 'Gallon of Milk',
+    emoji: '🥛',
+    facts: {
+      average_price: { value: 4.25, unit: '$', source: 'USDA Average Retail Price', asOf: '2024' },
+    },
+  },
+  {
+    id: 'loaf-of-bread',
+    name: 'Loaf of Bread',
+    emoji: '🍞',
+    facts: {
+      average_price: { value: 3.50, unit: '$', source: 'Bureau of Labor Statistics', asOf: '2024' },
+    },
+  },
+  {
+    id: 'honda-civic',
+    name: 'Honda Civic',
+    emoji: '🚗',
+    facts: {
+      average_price: { value: 24950, unit: '$', source: 'Honda', asOf: '2024' },
+    },
+  },
+  {
+    id: 'ipad',
+    name: 'iPad',
+    emoji: '📱',
+    facts: {
+      average_price: { value: 449, unit: '$', source: 'Apple', asOf: '2024' },
+    },
+  },
+  {
+    id: 'lego-millennium-falcon',
+    name: 'LEGO Millennium Falcon',
+    emoji: '🧱',
+    facts: {
+      average_price: { value: 849, unit: '$', source: 'LEGO', asOf: '2024' },
+    },
+  },
+  {
+    id: 'yeti-tumbler',
+    name: 'YETI Tumbler',
+    emoji: '🥤',
+    facts: {
+      average_price: { value: 38, unit: '$', source: 'YETI', asOf: '2024' },
+    },
+  },
+  {
+    id: 'stanley-cup-tumbler',
+    name: 'Stanley Cup Tumbler',
+    emoji: '🥤',
+    facts: {
+      average_price: { value: 45, unit: '$', source: 'Stanley', asOf: '2024' },
+    },
+  },
+  {
+    id: 'nfl-jersey',
+    name: 'NFL Jersey',
+    emoji: '🏈',
+    facts: {
+      average_price: { value: 130, unit: '$', source: 'NFL Shop', asOf: '2024' },
+    },
+  },
+  {
+    id: 'plane-ticket-domestic',
+    name: 'Domestic Plane Ticket',
+    emoji: '✈️',
+    facts: {
+      average_price: { value: 360, unit: '$', source: 'Bureau of Transportation Statistics', asOf: '2024' },
+    },
+  },
+  {
+    id: 'annual-car-insurance',
+    name: 'Annual Car Insurance',
+    emoji: '🚙',
+    facts: {
+      average_price: { value: 2150, unit: '$', source: 'Insurance Information Institute', asOf: '2024' },
+    },
+  },
+  {
+    id: 'gopro-hero',
+    name: 'GoPro Hero',
+    emoji: '📷',
+    facts: {
+      average_price: { value: 399, unit: '$', source: 'GoPro', asOf: '2024' },
+    },
+  },
+  {
+    id: 'electric-scooter',
+    name: 'Electric Scooter',
+    emoji: '🛴',
+    facts: {
+      average_price: { value: 450, unit: '$', source: 'Consumer Reports', asOf: '2024' },
+    },
+  },
+  {
+    id: 'dyson-vacuum',
+    name: 'Dyson Vacuum',
+    emoji: '🧹',
+    facts: {
+      average_price: { value: 499, unit: '$', source: 'Dyson', asOf: '2024' },
+    },
+  },
+  {
+    id: 'kindle',
+    name: 'Kindle',
+    emoji: '📖',
+    facts: {
+      average_price: { value: 99, unit: '$', source: 'Amazon', asOf: '2024' },
+    },
+  },
 ]
