@@ -27,9 +27,9 @@ export function useGame(items: Item[], categories: Category[]) {
     const challengerVal = state.currentPair[1].facts[state.category.metricKey].value
 
     if (state.choice === 'higher') {
-      return challengerVal >= anchorVal
+      return challengerVal > anchorVal
     }
-    return challengerVal <= anchorVal
+    return challengerVal < anchorVal
   }, [state.currentPair, state.choice, state.category])
 
   // Persist record to localStorage whenever it changes
