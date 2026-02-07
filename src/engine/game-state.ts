@@ -60,6 +60,12 @@ export function gameReducer(state: GameState, action: Action): GameState {
         record: state.record,
       }
 
+    case 'QUIT':
+      return {
+        ...initialState,
+        record: state.record,
+      }
+
     default:
       return state
   }

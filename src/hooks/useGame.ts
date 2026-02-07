@@ -71,6 +71,10 @@ export function useGame() {
     dispatch({ type: 'RESET' })
   }, [])
 
+  const quit = useCallback(() => {
+    dispatch({ type: 'QUIT' })
+  }, [])
+
   return {
     state,
     anchor,
@@ -82,5 +86,6 @@ export function useGame() {
     choose,
     completeReveal,
     reset,
+    quit,
   }
 }

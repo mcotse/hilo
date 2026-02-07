@@ -37,6 +37,7 @@ export type Action =
   | { type: 'REVEAL_COMPLETE'; isCorrect: boolean }
   | { type: 'NEXT_ROUND'; pair: [Item, Item] }
   | { type: 'RESET' }
+  | { type: 'QUIT' }
 
 export type StreakTier = 'calm' | 'warm' | 'hot' | 'fire'
 

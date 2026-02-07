@@ -4,6 +4,7 @@ type TopBarProps = {
   streak: number
   record: number
   streakTier: StreakTier
+  onPause?: () => void
 }
 
 const tierConfig: Record<StreakTier, { color: string; icon: string; glow: boolean }> = {
@@ -13,7 +14,7 @@ const tierConfig: Record<StreakTier, { color: string; icon: string; glow: boolea
   fire: { color: '#ff7744', icon: '🔥', glow: true },
 }
 
-export function TopBar({ streak, record, streakTier }: TopBarProps) {
+export function TopBar({ streak, record, streakTier, onPause }: TopBarProps) {
   const config = tierConfig[streakTier]
   const isAtRecord = streak > 0 && streak === record
 
@@ -36,19 +37,66 @@ export function TopBar({ streak, record, streakTier }: TopBarProps) {
         </span>
       </div>
 
-      {/* Record */}
-      <div
-        className="flex items-center gap-2"
-        style={{
-          fontFamily: "'Space Mono', monospace",
-          fontSize: '14px',
-          color: 'var(--text-muted)',
-          opacity: 0.4,
-          animation: isAtRecord ? 'pulse-scale 1.5s ease-in-out infinite' : 'none',
-        }}
-      >
-        <span>RECORD</span>
-        <span style={{ fontWeight: 700 }}>{record}</span>
+      {/* Pause + Record */}
+      <div className="flex items-center gap-6">
+        {onPause && (
+          <button
+            onClick={onPause}
+            className="cursor-pointer flex items-center justify-center"
+            aria-label="Pause"
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: '8px',
+              display: 'flex',
+              gap: '3px',
+              opacity: 0.35,
+              transition: 'transform 0.15s ease, opacity 0.15s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.2)'
+              e.currentTarget.style.opacity = '0.6'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)'
+              e.currentTarget.style.opacity = '0.35'
+            }}
+          >
+            <span
+              style={{
+                display: 'block',
+                width: '4px',
+                height: '16px',
+                backgroundColor: 'var(--text-muted)',
+                borderRadius: '1px',
+              }}
+            />
+            <span
+              style={{
+                display: 'block',
+                width: '4px',
+                height: '16px',
+                backgroundColor: 'var(--text-muted)',
+                borderRadius: '1px',
+              }}
+            />
+          </button>
+        )}
+
+        {/* Record */}
+        <div
+          className="flex items-center gap-2"
+          style={{
+            fontFamily: "'Space Mono', monospace",
+            fontSize: '14px',
+            color: 'var(--text-muted)',
+            opacity: 0.4,
+            animation: isAtRecord ? 'pulse-scale 1.5s ease-in-out infinite' : 'none',
+          }}
+        >
+          <span>RECORD</span>
+          <span style={{ fontWeight: 700 }}>{record}</span>
+        </div>
       </div>
     </div>
   )

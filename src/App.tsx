@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { AnimatePresence } from 'motion/react'
 import { GameShell } from '@/components/GameShell'
 import { TopBar } from '@/components/TopBar'
 import { CardArena } from '@/components/CardArena'
@@ -6,6 +8,7 @@ import { QuestionBar } from '@/components/QuestionBar'
 import { StartScreen } from '@/components/StartScreen'
 import { RevealSequence } from '@/components/RevealSequence'
 import { GameOverOverlay } from '@/components/GameOverOverlay'
+import { PauseOverlay } from '@/components/PauseOverlay'
 import { useGame } from '@/hooks/useGame'
 
 function HigherLowerButtons({
@@ -88,7 +91,10 @@ function App() {
     choose,
     completeReveal,
     reset,
+    quit,
   } = useGame()
+
+  const [paused, setPaused] = useState(false)
 
   if (state.phase === 'start') {
     return <StartScreen record={state.record} onPlay={startGame} />
@@ -107,7 +113,7 @@ function App() {
 
   return (
     <GameShell catColor={catColor}>
-      <TopBar streak={state.streak} record={state.record} streakTier={streakTier} />
+      <TopBar streak={state.streak} record={state.record} streakTier={streakTier} onPause={() => setPaused(true)} />
 
       <CardArena
         anchorKey={anchor.id}
@@ -121,7 +127,7 @@ function App() {
               <HigherLowerButtons
                 onHigher={() => choose('higher')}
                 onLower={() => choose('lower')}
-                disabled={false}
+                disabled={paused}
               />
             )}
             {state.phase === 'revealing' && (
@@ -151,6 +157,16 @@ function App() {
         categoryLabel={state.category.label}
         catColor={catColor}
       />
+
+      <AnimatePresence>
+        {paused && (state.phase === 'comparing' || state.phase === 'revealing') && (
+          <PauseOverlay
+            streak={state.streak}
+            onResume={() => setPaused(false)}
+            onQuit={() => { setPaused(false); quit() }}
+          />
+        )}
+      </AnimatePresence>
 
       {state.phase === 'game_over' && (
         <GameOverOverlay
