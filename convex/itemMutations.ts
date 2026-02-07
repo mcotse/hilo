@@ -1,5 +1,6 @@
 import { mutation, internalMutation } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAdmin } from "./lib/authGuard";
 
 /**
  * Create a new item.
@@ -13,6 +14,7 @@ export const create = mutation({
     imageUrl: v.optional(v.string()),
   },
   handler: async (ctx, { name, slug, emoji, tags, imageUrl }) => {
+    await requireAdmin(ctx);
     const now = Date.now();
     return ctx.db.insert("items", {
       name,
@@ -38,6 +40,7 @@ export const update = mutation({
     imageUrl: v.optional(v.string()),
   },
   handler: async (ctx, { id, ...fields }) => {
+    await requireAdmin(ctx);
     // Build a patch object with only the provided fields
     const patch: Record<string, unknown> = { updatedAt: Date.now() };
     if (fields.name !== undefined) patch.name = fields.name;
@@ -57,6 +60,7 @@ export const remove = mutation({
     id: v.id("items"),
   },
   handler: async (ctx, { id }) => {
+    await requireAdmin(ctx);
     // First delete all facts associated with this item
     const facts = await ctx.db
       .query("facts")
@@ -86,6 +90,7 @@ export const createFact = mutation({
     asOf: v.string(),
   },
   handler: async (ctx, { itemId, metricKey, value, unit, source, sourceUrl, asOf }) => {
+    await requireAdmin(ctx);
     const now = Date.now();
     return ctx.db.insert("facts", {
       itemId,
@@ -121,6 +126,7 @@ export const updateFact = mutation({
     ),
   },
   handler: async (ctx, { id, ...fields }) => {
+    await requireAdmin(ctx);
     const patch: Record<string, unknown> = { updatedAt: Date.now() };
     if (fields.value !== undefined) patch.value = fields.value;
     if (fields.source !== undefined) patch.source = fields.source;

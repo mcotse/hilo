@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router'
+import { useAuth, SignIn, UserButton } from '@clerk/clerk-react'
 
 const navItems = [
   { to: '/admin', label: 'Dashboard', end: true },
@@ -9,6 +10,24 @@ const navItems = [
 ]
 
 export function AdminLayout() {
+  const { isLoaded, isSignedIn } = useAuth()
+
+  if (!isLoaded) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-neutral-950 text-white">
+        <p className="text-white/50">Loading…</p>
+      </div>
+    )
+  }
+
+  if (!isSignedIn) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-neutral-950">
+        <SignIn routing="hash" />
+      </div>
+    )
+  }
+
   return (
     <div className="flex min-h-screen bg-neutral-950 text-white">
       {/* Sidebar */}
@@ -36,7 +55,11 @@ export function AdminLayout() {
           ))}
         </nav>
 
-        <div className="px-3 py-4 border-t border-white/10">
+        <div className="px-3 py-4 border-t border-white/10 flex flex-col gap-3">
+          <div className="flex items-center gap-3 px-3">
+            <UserButton afterSignOutUrl="/admin" />
+            <span className="text-sm text-white/50">Account</span>
+          </div>
           <NavLink
             to="/"
             className="block px-3 py-2 rounded-md text-sm font-medium text-white/40 hover:text-white hover:bg-white/5 transition-colors"

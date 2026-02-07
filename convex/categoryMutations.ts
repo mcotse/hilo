@@ -1,5 +1,6 @@
 import { mutation } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAdmin } from "./lib/authGuard";
 
 /**
  * Create a new category.
@@ -15,6 +16,7 @@ export const create = mutation({
     sortOrder: v.number(),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     return ctx.db.insert("categories", {
       ...args,
       enabled: true,
@@ -36,6 +38,7 @@ export const update = mutation({
     sortOrder: v.optional(v.number()),
   },
   handler: async (ctx, { id, ...fields }) => {
+    await requireAdmin(ctx);
     const patch: Record<string, unknown> = {};
     if (fields.label !== undefined) patch.label = fields.label;
     if (fields.question !== undefined) patch.question = fields.question;

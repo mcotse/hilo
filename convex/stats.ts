@@ -1,8 +1,10 @@
 import { query } from "./_generated/server";
+import { requireAdmin } from "./lib/authGuard";
 
 export const overview = query({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     const items = await ctx.db.query("items").collect();
     const facts = await ctx.db.query("facts").collect();
     const openDisputes = await ctx.db

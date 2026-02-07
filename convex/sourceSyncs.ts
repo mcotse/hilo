@@ -1,5 +1,6 @@
 import { query, internalMutation } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAdmin } from "./lib/authGuard";
 
 /**
  * Record a sync result from an adapter run.
@@ -31,6 +32,7 @@ export const recordSync = internalMutation({
 export const getLatest = query({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     const allSyncs = await ctx.db.query("sourceSyncs").collect();
 
     // Group by adapterName and keep only the most recent
@@ -54,6 +56,7 @@ export const listByAdapter = query({
     adapterName: v.string(),
   },
   handler: async (ctx, { adapterName }) => {
+    await requireAdmin(ctx);
     const syncs = await ctx.db
       .query("sourceSyncs")
       .withIndex("by_adapter", (q) => q.eq("adapterName", adapterName))

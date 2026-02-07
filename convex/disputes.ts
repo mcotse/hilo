@@ -1,5 +1,6 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAdmin } from "./lib/authGuard";
 
 /**
  * Player submits a dispute against a fact (no auth required).
@@ -55,6 +56,7 @@ export const list = query({
     ),
   },
   handler: async (ctx, { status }) => {
+    await requireAdmin(ctx);
     if (status) {
       return ctx.db
         .query("disputes")
@@ -75,6 +77,7 @@ export const resolve = mutation({
     resolvedBy: v.string(),
   },
   handler: async (ctx, { disputeId, resolution, resolvedBy }) => {
+    await requireAdmin(ctx);
     await ctx.db.patch(disputeId, {
       status: "resolved",
       resolution,
@@ -94,6 +97,7 @@ export const dismiss = mutation({
     resolvedBy: v.string(),
   },
   handler: async (ctx, { disputeId, resolution, resolvedBy }) => {
+    await requireAdmin(ctx);
     await ctx.db.patch(disputeId, {
       status: "dismissed",
       resolution,
