@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { animate } from 'motion'
+import { useIsMobile } from '@/hooks/useIsMobile'
 
 type RevealSequenceProps = {
   targetValue: number
@@ -16,6 +17,7 @@ export function RevealSequence({
   onComplete,
   ratio,
 }: RevealSequenceProps) {
+  const isMobile = useIsMobile()
   const [displayValue, setDisplayValue] = useState(0)
   const [phase, setPhase] = useState<'counting' | 'verdict' | 'done'>('counting')
   const hasCompleted = useRef(false)
@@ -64,7 +66,7 @@ export function RevealSequence({
         style={{
           fontFamily: "'Space Mono', monospace",
           fontWeight: 700,
-          fontSize: 'clamp(28px, 2.5vw, 40px)',
+          fontSize: isMobile ? 'clamp(20px, 5vw, 28px)' : 'clamp(28px, 2.5vw, 40px)',
           color: phase === 'verdict' || phase === 'done' ? verdictColor : 'var(--cat-color)',
           fontVariantNumeric: 'tabular-nums',
           transition: 'color 0.2s ease',
@@ -75,7 +77,7 @@ export function RevealSequence({
       {(phase === 'verdict' || phase === 'done') && (
         <span
           style={{
-            fontSize: '28px',
+            fontSize: isMobile ? '22px' : '28px',
             color: verdictColor,
             opacity: 0,
             animation: 'fadeIn 0.2s ease forwards',
