@@ -44,7 +44,7 @@ export function CardArena({ anchorCard, challengerCard, anchorKey, challengerKey
           key={`challenger-${challengerKey}`}
           initial={{ x: 300, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -300, opacity: 0 }}
+          exit={{ x: 300, opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           {challengerCard}
