@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 type Particle = {
   id: number
@@ -29,11 +29,7 @@ function generateParticles(count: number): Particle[] {
 }
 
 export function Confetti() {
-  const [particles, setParticles] = useState<Particle[]>([])
-
-  useEffect(() => {
-    setParticles(generateParticles(25))
-  }, [])
+  const [particles] = useState(() => generateParticles(25))
 
   if (particles.length === 0) return null
 
