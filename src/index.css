@@ -36,6 +36,18 @@ body {
   }
 }
 
+/* Prevent iOS zoom on input focus (requires font-size >= 16px) */
+@media (max-width: 639px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+/* Disable pull-to-refresh on game screens */
+html {
+  overscroll-behavior: none;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.8); }
   to { opacity: 1; transform: scale(1); }
