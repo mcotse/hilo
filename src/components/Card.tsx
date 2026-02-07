@@ -6,9 +6,29 @@ type CardProps = {
   category: Category
   variant: 'anchor' | 'challenger'
   children?: ReactNode
+  showFlag?: boolean
+  onFlag?: () => void
 }
 
-export function Card({ item, category, variant, children }: CardProps) {
+function FlagIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+      <line x1="4" y1="22" x2="4" y2="15" />
+    </svg>
+  )
+}
+
+export function Card({ item, category, variant, children, showFlag, onFlag }: CardProps) {
   const value = item.facts[category.metricKey]?.value
   const isAnchor = variant === 'anchor'
 
@@ -16,6 +36,7 @@ export function Card({ item, category, variant, children }: CardProps) {
     <div
       className="flex flex-col items-center justify-center gap-4 rounded-2xl"
       style={{
+        position: 'relative',
         width: 'clamp(280px, 20vw, 320px)',
         height: 'clamp(360px, 35vh, 420px)',
         padding: '28px',
@@ -32,6 +53,42 @@ export function Card({ item, category, variant, children }: CardProps) {
         opacity: isAnchor ? 0.85 : 1,
       }}
     >
+      {/* Flag button */}
+      {showFlag && onFlag && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            onFlag()
+          }}
+          aria-label="Flag fact"
+          className="dispute-flag-btn"
+          style={{
+            position: 'absolute',
+            top: '10px',
+            right: '10px',
+            background: 'none',
+            border: 'none',
+            color: 'rgba(255, 255, 255, 0.25)',
+            cursor: 'pointer',
+            padding: '6px',
+            borderRadius: '6px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'color 0.15s ease, background 0.15s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)'
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.25)'
+            e.currentTarget.style.background = 'none'
+          }}
+        >
+          <FlagIcon />
+        </button>
+      )}
       {/* Emoji */}
       <span style={{ fontSize: 'clamp(48px, 4vw, 56px)' }}>{item.emoji}</span>
 

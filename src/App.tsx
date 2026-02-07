@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { useQuery } from 'convex/react'
 import { api } from '../convex/_generated/api'
 import { AnimatePresence } from 'motion/react'
@@ -11,6 +11,7 @@ import { StartScreen } from '@/components/StartScreen'
 import { RevealSequence } from '@/components/RevealSequence'
 import { GameOverOverlay } from '@/components/GameOverOverlay'
 import { PauseOverlay } from '@/components/PauseOverlay'
+import { DisputeSheet } from '@/components/DisputeSheet'
 import { useGame } from '@/hooks/useGame'
 import { createFormatValue } from '@/lib/formatValue'
 import type { Item, Category } from '@/engine/types'
@@ -102,10 +103,11 @@ function App() {
     }))
   }, [rawCategories])
 
-  // Transform Convex items to game Item type
-  const items: Item[] = useMemo(() => {
-    if (!rawItems) return []
-    return rawItems.map((item) => {
+  // Transform Convex items to game Item type + build factId lookup map
+  const { items, factIdMap } = useMemo(() => {
+    if (!rawItems) return { items: [] as Item[], factIdMap: new Map<string, string>() }
+    const map = new Map<string, string>()
+    const gameItems = rawItems.map((item) => {
       const facts: Record<string, { value: number; unit: string; source: string; asOf?: string }> = {}
       for (const fact of item.facts) {
         facts[fact.metricKey] = {
@@ -114,6 +116,8 @@ function App() {
           source: fact.source,
           ...(fact.asOf ? { asOf: fact.asOf } : {}),
         }
+        // key: "itemSlug|metricKey" -> Convex fact _id
+        map.set(`${item.slug}|${fact.metricKey}`, fact._id)
       }
       return {
         id: item.slug,
@@ -122,6 +126,7 @@ function App() {
         facts,
       }
     })
+    return { items: gameItems, factIdMap: map }
   }, [rawItems])
 
   const {
@@ -138,6 +143,15 @@ function App() {
   } = useGame(items, categories)
 
   const [paused, setPaused] = useState(false)
+  const [disputeFactId, setDisputeFactId] = useState<string | null>(null)
+
+  // Look up a factId from an item slug and the current metricKey
+  const openDispute = useCallback((itemSlug: string) => {
+    if (!state.category) return
+    const key = `${itemSlug}|${state.category.metricKey}`
+    const factId = factIdMap.get(key)
+    if (factId) setDisputeFactId(factId)
+  }, [state.category, factIdMap])
 
   // Show loading while Convex data is loading
   if (!rawCategories || !rawItems) {
@@ -182,10 +196,22 @@ function App() {
         anchorKey={anchor.id}
         challengerKey={challenger.id}
         anchorCard={
-          <Card item={anchor} category={state.category} variant="anchor" />
+          <Card
+            item={anchor}
+            category={state.category}
+            variant="anchor"
+            showFlag={state.phase === 'revealing' || state.phase === 'game_over'}
+            onFlag={() => openDispute(anchor.id)}
+          />
         }
         challengerCard={
-          <Card item={challenger} category={state.category} variant="challenger">
+          <Card
+            item={challenger}
+            category={state.category}
+            variant="challenger"
+            showFlag={state.phase === 'revealing' || state.phase === 'game_over'}
+            onFlag={() => openDispute(challenger.id)}
+          >
             {state.phase === 'comparing' && (
               <HigherLowerButtons
                 onHigher={() => choose('higher')}
@@ -242,6 +268,21 @@ function App() {
           onPlayAgain={reset}
         />
       )}
+
+      {disputeFactId && state.category && (() => {
+        // Determine which item is being disputed by reverse-looking up the factId
+        const anchorFactId = factIdMap.get(`${anchor.id}|${state.category!.metricKey}`)
+        const disputedItem = disputeFactId === anchorFactId ? anchor : challenger
+        const fact = disputedItem.facts[state.category!.metricKey]
+        return (
+          <DisputeSheet
+            factId={disputeFactId}
+            itemName={disputedItem.name}
+            formattedValue={fact ? state.category!.formatValue(fact.value) : ''}
+            onClose={() => setDisputeFactId(null)}
+          />
+        )
+      })()}
     </GameShell>
   )
 }
