@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --bg: #0c0c14;
+  --bg-card: #13131d;
+  --bg-elevated: #1c1c2a;
+  --text: #e8e6f0;
+  --text-muted: #7a7694;
+  --border: rgba(255, 255, 255, 0.06);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-bg-hover: rgba(255, 255, 255, 0.07);
+  --correct: #6ee7a0;
+  --wrong: #ff6b8a;
+
+  /* Category color — set dynamically by GameShell */
+  --cat-color: #ffb380;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
