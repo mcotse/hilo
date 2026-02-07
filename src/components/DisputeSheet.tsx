@@ -106,7 +106,7 @@ export function DisputeSheet({ factId, itemName, formattedValue, onClose }: Disp
           maxWidth: '420px',
           background: '#1a1a2e',
           borderRadius: '16px 16px 0 0',
-          padding: '24px',
+          padding: '24px 24px calc(24px + env(safe-area-inset-bottom, 0px))',
           border: '1px solid rgba(255, 255, 255, 0.08)',
           borderBottom: 'none',
           animation: 'slideUp 0.25s ease-out',
@@ -271,6 +271,8 @@ export function DisputeSheet({ factId, itemName, formattedValue, onClose }: Disp
                 cursor: status === 'submitting' ? 'wait' : 'pointer',
                 opacity: status === 'submitting' ? 0.6 : 1,
                 transition: 'all 0.15s ease',
+                WebkitTapHighlightColor: 'transparent',
+                touchAction: 'manipulation',
               }}
             >
               {status === 'submitting' ? 'Submitting...' : 'Submit Flag'}
