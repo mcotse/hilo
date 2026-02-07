@@ -1,4 +1,5 @@
 import { query } from "./_generated/server";
+import { requireAdmin } from "./lib/authGuard";
 
 /**
  * Used by the game. Returns all enabled categories sorted by sortOrder ascending.
@@ -21,6 +22,7 @@ export const listEnabled = query({
 export const listAll = query({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     return ctx.db.query("categories").collect();
   },
 });
