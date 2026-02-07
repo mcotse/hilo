@@ -4,6 +4,8 @@ import { CardArena } from '@/components/CardArena'
 import { Card } from '@/components/Card'
 import { QuestionBar } from '@/components/QuestionBar'
 import { StartScreen } from '@/components/StartScreen'
+import { RevealSequence } from '@/components/RevealSequence'
+import { GameOverOverlay } from '@/components/GameOverOverlay'
 import { useGame } from '@/hooks/useGame'
 
 function HigherLowerButtons({
@@ -108,6 +110,8 @@ function App() {
       <TopBar streak={state.streak} record={state.record} streakTier={streakTier} />
 
       <CardArena
+        anchorKey={anchor.id}
+        challengerKey={challenger.id}
         anchorCard={
           <Card item={anchor} category={state.category} variant="anchor" />
         }
@@ -121,70 +125,22 @@ function App() {
               />
             )}
             {state.phase === 'revealing' && (
-              <div className="flex flex-col items-center gap-2">
-                <span
-                  style={{
-                    fontFamily: "'Space Mono', monospace",
-                    fontWeight: 700,
-                    fontSize: 'clamp(28px, 2.5vw, 40px)',
-                    color: 'var(--cat-color)',
-                    fontVariantNumeric: 'tabular-nums',
-                  }}
-                >
-                  {state.category.formatValue(challenger.facts[state.category.metricKey].value)}
-                </span>
-                <span style={{ fontSize: '24px' }}>
-                  {isCorrect() ? '✓' : '✗'}
-                </span>
-                <button
-                  onClick={() => completeReveal(isCorrect()!)}
-                  className="cursor-pointer mt-2"
-                  style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: '12px',
-                    padding: '6px 16px',
-                    background: 'rgba(255, 255, 255, 0.06)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    borderRadius: '6px',
-                    color: 'var(--text-muted)',
-                  }}
-                >
-                  {isCorrect() ? 'NEXT →' : 'GAME OVER'}
-                </button>
-              </div>
-            )}
-            {state.phase === 'game_over' && (
-              <div className="flex flex-col items-center gap-2">
-                <span
-                  style={{
-                    fontFamily: "'Space Mono', monospace",
-                    fontWeight: 700,
-                    fontSize: 'clamp(28px, 2.5vw, 40px)',
-                    color: 'var(--wrong)',
-                    fontVariantNumeric: 'tabular-nums',
-                  }}
-                >
-                  {state.category.formatValue(challenger.facts[state.category.metricKey].value)}
-                </span>
-                <p style={{ color: 'var(--text-muted)', fontFamily: "'Space Grotesk', sans-serif", fontSize: '14px' }}>
-                  Streak: {state.streak} | Record: {state.record}
-                </p>
-                <button
-                  onClick={reset}
-                  className="cursor-pointer"
-                  style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: '20px',
-                    padding: '10px 32px',
-                    background: 'color-mix(in srgb, var(--cat-color) 15%, transparent)',
-                    border: '1px solid color-mix(in srgb, var(--cat-color) 30%, transparent)',
-                    borderRadius: '8px',
-                    color: 'var(--cat-color)',
-                  }}
-                >
-                  PLAY AGAIN
-                </button>
-              </div>
+              <RevealSequence
+                targetValue={challenger.facts[state.category.metricKey].value}
+                formatValue={state.category.formatValue}
+                isCorrect={isCorrect()!}
+                onComplete={completeReveal}
+                ratio={
+                  Math.min(
+                    anchor.facts[state.category.metricKey].value,
+                    challenger.facts[state.category.metricKey].value
+                  ) /
+                  Math.max(
+                    anchor.facts[state.category.metricKey].value,
+                    challenger.facts[state.category.metricKey].value
+                  )
+                }
+              />
             )}
           </Card>
         }
@@ -195,6 +151,18 @@ function App() {
         categoryLabel={state.category.label}
         catColor={catColor}
       />
+
+      {state.phase === 'game_over' && (
+        <GameOverOverlay
+          anchor={anchor}
+          challenger={challenger}
+          category={state.category}
+          streak={state.streak}
+          record={state.record}
+          isNewRecord={state.streak === state.record && state.streak > 0}
+          onPlayAgain={reset}
+        />
+      )}
     </GameShell>
   )
 }
