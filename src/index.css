@@ -43,9 +43,11 @@ body {
   }
 }
 
-/* Disable pull-to-refresh on game screens */
-html {
-  overscroll-behavior: none;
+/* Disable pull-to-refresh on mobile game screens */
+@media (max-width: 639px) {
+  html {
+    overscroll-behavior: none;
+  }
 }
 
 @keyframes fadeIn {
