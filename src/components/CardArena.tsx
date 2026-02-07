@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react'
 import type { ReactNode } from 'react'
+import { useIsMobile } from '@/hooks/useIsMobile'
 
 type CardArenaProps = {
   anchorCard: ReactNode
@@ -9,17 +10,22 @@ type CardArenaProps = {
 }
 
 export function CardArena({ anchorCard, challengerCard, anchorKey, challengerKey }: CardArenaProps) {
+  const isMobile = useIsMobile()
+
   return (
     <div
       className="flex items-center justify-center flex-1"
-      style={{ gap: 'clamp(24px, 3vw, 48px)' }}
+      style={{
+        flexDirection: isMobile ? 'column' : 'row',
+        gap: isMobile ? 'clamp(8px, 2vh, 16px)' : 'clamp(24px, 3vw, 48px)',
+      }}
     >
       <AnimatePresence mode="popLayout">
         <motion.div
           key={`anchor-${anchorKey}`}
-          initial={{ x: -300, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -300, opacity: 0 }}
+          initial={{ x: isMobile ? 0 : -300, y: isMobile ? -100 : 0, opacity: 0 }}
+          animate={{ x: 0, y: 0, opacity: 1 }}
+          exit={{ x: isMobile ? 0 : -300, y: isMobile ? -100 : 0, opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           {anchorCard}
@@ -31,7 +37,7 @@ export function CardArena({ anchorCard, challengerCard, anchorKey, challengerKey
         style={{
           fontFamily: "'Space Grotesk', sans-serif",
           fontWeight: 700,
-          fontSize: 'clamp(18px, 1.5vw, 24px)',
+          fontSize: isMobile ? '14px' : 'clamp(18px, 1.5vw, 24px)',
           color: 'var(--text-muted)',
           opacity: 0.5,
         }}
@@ -42,9 +48,9 @@ export function CardArena({ anchorCard, challengerCard, anchorKey, challengerKey
       <AnimatePresence mode="popLayout">
         <motion.div
           key={`challenger-${challengerKey}`}
-          initial={{ x: 300, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: 300, opacity: 0 }}
+          initial={{ x: isMobile ? 0 : 300, y: isMobile ? 100 : 0, opacity: 0 }}
+          animate={{ x: 0, y: 0, opacity: 1 }}
+          exit={{ x: isMobile ? 0 : 300, y: isMobile ? 100 : 0, opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           {challengerCard}

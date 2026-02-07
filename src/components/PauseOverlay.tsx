@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { useIsMobile } from '@/hooks/useIsMobile'
 
 type PauseOverlayProps = {
   streak: number
@@ -7,6 +8,8 @@ type PauseOverlayProps = {
 }
 
 export function PauseOverlay({ streak, onResume, onQuit }: PauseOverlayProps) {
+  const isMobile = useIsMobile()
+
   return (
     <motion.div
       initial={{ y: '100%' }}
@@ -15,7 +18,8 @@ export function PauseOverlay({ streak, onResume, onQuit }: PauseOverlayProps) {
       transition={{ type: 'spring', damping: 25, stiffness: 200 }}
       className="absolute bottom-0 left-0 right-0 flex flex-col items-center justify-center gap-6 z-50"
       style={{
-        height: '70%',
+        height: isMobile ? '75%' : '70%',
+        padding: isMobile ? '24px 16px' : undefined,
         background: 'rgba(12, 12, 20, 0.85)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
@@ -26,7 +30,7 @@ export function PauseOverlay({ streak, onResume, onQuit }: PauseOverlayProps) {
       <h2
         style={{
           fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: 'clamp(56px, 5vw, 72px)',
+          fontSize: isMobile ? 'clamp(40px, 10vw, 52px)' : 'clamp(56px, 5vw, 72px)',
           color: 'var(--text)',
           margin: 0,
         }}
@@ -38,7 +42,7 @@ export function PauseOverlay({ streak, onResume, onQuit }: PauseOverlayProps) {
       <p style={{
         fontFamily: "'Space Grotesk', sans-serif",
         fontWeight: 600,
-        fontSize: '18px',
+        fontSize: isMobile ? '16px' : '18px',
         color: 'var(--text)',
         margin: 0,
       }}>
@@ -51,7 +55,7 @@ export function PauseOverlay({ streak, onResume, onQuit }: PauseOverlayProps) {
       {/* Warning */}
       <p style={{
         fontFamily: "'Space Mono', monospace",
-        fontSize: '14px',
+        fontSize: isMobile ? '12px' : '14px',
         color: 'var(--text-muted)',
         margin: 0,
       }}>
@@ -59,7 +63,7 @@ export function PauseOverlay({ streak, onResume, onQuit }: PauseOverlayProps) {
       </p>
 
       {/* Buttons */}
-      <div className="flex flex-col gap-3" style={{ width: '220px', marginTop: '8px' }}>
+      <div className="flex flex-col gap-3" style={{ width: isMobile ? '200px' : '220px', marginTop: '8px' }}>
         <button
           onClick={onQuit}
           className="cursor-pointer"
@@ -73,6 +77,8 @@ export function PauseOverlay({ streak, onResume, onQuit }: PauseOverlayProps) {
             borderRadius: '12px',
             color: 'var(--text-muted)',
             transition: 'transform 0.15s ease, background 0.15s ease',
+            WebkitTapHighlightColor: 'transparent',
+            touchAction: 'manipulation',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'scale(1.05)'
@@ -98,6 +104,8 @@ export function PauseOverlay({ streak, onResume, onQuit }: PauseOverlayProps) {
             borderRadius: '12px',
             color: 'var(--cat-color)',
             transition: 'transform 0.15s ease, background 0.15s ease',
+            WebkitTapHighlightColor: 'transparent',
+            touchAction: 'manipulation',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'scale(1.05)'

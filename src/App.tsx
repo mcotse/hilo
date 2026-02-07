@@ -26,7 +26,7 @@ function HigherLowerButtons({
   disabled: boolean
 }) {
   return (
-    <div className="flex flex-col gap-3 w-full">
+    <div className="flex flex-col gap-2 w-full">
       <button
         onClick={onHigher}
         disabled={disabled}
@@ -36,12 +36,14 @@ function HigherLowerButtons({
           fontSize: '14px',
           fontWeight: 600,
           letterSpacing: '0.05em',
-          padding: '10px 0',
+          padding: '12px 0',
           background: 'color-mix(in srgb, var(--cat-color) 10%, transparent)',
           border: '1px solid color-mix(in srgb, var(--cat-color) 30%, transparent)',
           borderRadius: '8px',
           color: 'var(--cat-color)',
           transition: 'transform 0.15s ease, background 0.15s ease',
+          WebkitTapHighlightColor: 'transparent',
+          touchAction: 'manipulation',
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.transform = 'scale(1.03)'
@@ -63,12 +65,14 @@ function HigherLowerButtons({
           fontSize: '14px',
           fontWeight: 600,
           letterSpacing: '0.05em',
-          padding: '10px 0',
+          padding: '12px 0',
           background: 'rgba(255, 255, 255, 0.03)',
           border: '1px solid rgba(255, 255, 255, 0.08)',
           borderRadius: '8px',
           color: 'rgba(255, 255, 255, 0.5)',
           transition: 'transform 0.15s ease, background 0.15s ease',
+          WebkitTapHighlightColor: 'transparent',
+          touchAction: 'manipulation',
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.transform = 'scale(1.03)'

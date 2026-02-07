@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router'
 import { useAuth, SignIn, UserButton } from '@clerk/clerk-react'
+import { useIsMobile } from '@/hooks/useIsMobile'
 
 const navItems = [
   { to: '/admin', label: 'Dashboard', end: true },
@@ -11,6 +13,8 @@ const navItems = [
 
 export function AdminLayout() {
   const { isLoaded, isSignedIn } = useAuth()
+  const isMobile = useIsMobile()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   if (!isLoaded) {
     return (
@@ -30,8 +34,39 @@ export function AdminLayout() {
 
   return (
     <div className="flex min-h-screen bg-neutral-950 text-white">
+      {/* Mobile header bar */}
+      {isMobile && (
+        <div className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4 py-3 bg-neutral-900 border-b border-white/10">
+          <h1 className="text-lg font-bold tracking-wide">Admin</h1>
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="p-2 text-white/60"
+            aria-label="Toggle menu"
+            style={{ background: 'none', border: 'none', fontSize: '20px' }}
+          >
+            {sidebarOpen ? '✕' : '☰'}
+          </button>
+        </div>
+      )}
+
+      {/* Backdrop for mobile sidebar */}
+      {isMobile && sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-60 shrink-0 border-r border-white/10 bg-neutral-900 flex flex-col">
+      <aside
+        className={`${isMobile ? 'fixed top-0 left-0 z-50 h-full' : ''} w-60 shrink-0 border-r border-white/10 bg-neutral-900 flex flex-col`}
+        style={{
+          ...(isMobile ? {
+            transform: sidebarOpen ? 'translateX(0)' : 'translateX(-100%)',
+            transition: 'transform 0.2s ease',
+          } : {}),
+        }}
+      >
         <div className="px-6 py-5 border-b border-white/10">
           <h1 className="text-lg font-bold tracking-wide">Admin</h1>
         </div>
@@ -42,6 +77,7 @@ export function AdminLayout() {
               key={to}
               to={to}
               end={end}
+              onClick={() => isMobile && setSidebarOpen(false)}
               className={({ isActive }) =>
                 `block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   isActive
@@ -70,7 +106,7 @@ export function AdminLayout() {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 p-8">
+      <main className="flex-1" style={{ padding: isMobile ? '64px 16px 16px' : '32px' }}>
         <Outlet />
       </main>
     </div>

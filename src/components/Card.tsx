@@ -1,5 +1,6 @@
 import type { Item, Category } from '@/engine/types'
 import type { ReactNode } from 'react'
+import { useIsMobile } from '@/hooks/useIsMobile'
 
 type CardProps = {
   item: Item
@@ -31,15 +32,16 @@ function FlagIcon() {
 export function Card({ item, category, variant, children, showFlag, onFlag }: CardProps) {
   const value = item.facts[category.metricKey]?.value
   const isAnchor = variant === 'anchor'
+  const isMobile = useIsMobile()
 
   return (
     <div
-      className="flex flex-col items-center justify-center gap-4 rounded-2xl"
+      className="flex flex-col items-center justify-center gap-3 rounded-2xl"
       style={{
         position: 'relative',
-        width: 'clamp(280px, 20vw, 320px)',
-        height: 'clamp(360px, 35vh, 420px)',
-        padding: '28px',
+        width: isMobile ? 'clamp(260px, 75vw, 320px)' : 'clamp(280px, 20vw, 320px)',
+        height: isMobile ? 'clamp(180px, 28vh, 220px)' : 'clamp(360px, 35vh, 420px)',
+        padding: isMobile ? '16px' : '28px',
         background: isAnchor ? 'rgba(255, 255, 255, 0.04)' : 'rgba(255, 255, 255, 0.06)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
@@ -90,7 +92,9 @@ export function Card({ item, category, variant, children, showFlag, onFlag }: Ca
         </button>
       )}
       {/* Emoji */}
-      <span style={{ fontSize: 'clamp(48px, 4vw, 56px)' }}>{item.emoji}</span>
+      <span style={{ fontSize: isMobile ? 'clamp(28px, 6vw, 36px)' : 'clamp(48px, 4vw, 56px)' }}>
+        {item.emoji}
+      </span>
 
       {/* Item name */}
       <span
@@ -98,7 +102,7 @@ export function Card({ item, category, variant, children, showFlag, onFlag }: Ca
         style={{
           fontFamily: "'Space Grotesk', sans-serif",
           fontWeight: 600,
-          fontSize: 'clamp(16px, 1.2vw, 22px)',
+          fontSize: isMobile ? 'clamp(14px, 3.5vw, 16px)' : 'clamp(16px, 1.2vw, 22px)',
           color: 'var(--text)',
         }}
       >
@@ -113,7 +117,7 @@ export function Card({ item, category, variant, children, showFlag, onFlag }: Ca
               style={{
                 fontFamily: "'Space Mono', monospace",
                 fontWeight: 700,
-                fontSize: 'clamp(28px, 2.5vw, 40px)',
+                fontSize: isMobile ? 'clamp(20px, 5vw, 28px)' : 'clamp(28px, 2.5vw, 40px)',
                 color: 'var(--cat-color)',
                 fontVariantNumeric: 'tabular-nums',
               }}
