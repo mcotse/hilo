@@ -93,7 +93,7 @@ export function AdminLayout() {
 
         <div className="px-3 py-4 border-t border-white/10 flex flex-col gap-3">
           <div className="flex items-center gap-3 px-3">
-            <UserButton afterSignOutUrl="/admin" />
+            <UserButton afterSignOutUrl={import.meta.env.BASE_URL + 'admin'} />
             <span className="text-sm text-white/50">Account</span>
           </div>
           <NavLink
