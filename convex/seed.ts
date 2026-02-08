@@ -382,6 +382,206 @@ export default internalMutation({
           average_price: { value: 16.00, unit: "$", source: "Restaurant average", asOf: "2024" },
         },
       },
+      {
+        slug: "sushi-roll-8pc",
+        name: "Sushi Roll (8pc)",
+        emoji: "🍣",
+        tags: ["food"],
+        facts: {
+          calories: { value: 350, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 12, unit: "$", source: "Restaurant average", asOf: "2024" },
+        },
+      },
+      {
+        slug: "taco-bell-crunchwrap",
+        name: "Taco Bell Crunchwrap",
+        emoji: "🌮",
+        tags: ["food"],
+        facts: {
+          calories: { value: 530, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 4.79, unit: "$", source: "Taco Bell menu", asOf: "2024" },
+        },
+      },
+      {
+        slug: "wendys-baconator",
+        name: "Wendy's Baconator",
+        emoji: "🍔",
+        tags: ["food"],
+        facts: {
+          calories: { value: 960, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 8.49, unit: "$", source: "Wendy's menu", asOf: "2024" },
+        },
+      },
+      {
+        slug: "fish-and-chips",
+        name: "Fish & Chips",
+        emoji: "🐟",
+        tags: ["food"],
+        facts: {
+          calories: { value: 840, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 14, unit: "$", source: "Restaurant average", asOf: "2024" },
+        },
+      },
+      {
+        slug: "pho",
+        name: "Pho",
+        emoji: "🍜",
+        tags: ["food"],
+        facts: {
+          calories: { value: 450, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 13, unit: "$", source: "Restaurant average", asOf: "2024" },
+        },
+      },
+      {
+        slug: "kebab-plate",
+        name: "Kebab Plate",
+        emoji: "🥙",
+        tags: ["food"],
+        facts: {
+          calories: { value: 700, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 12, unit: "$", source: "Restaurant average", asOf: "2024" },
+        },
+      },
+      {
+        slug: "acai-bowl",
+        name: "Açaí Bowl",
+        emoji: "🫐",
+        tags: ["food"],
+        facts: {
+          calories: { value: 510, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 11, unit: "$", source: "Restaurant average", asOf: "2024" },
+        },
+      },
+      {
+        slug: "dim-sum-6pc",
+        name: "Dim Sum (6pc)",
+        emoji: "🥟",
+        tags: ["food"],
+        facts: {
+          calories: { value: 320, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 8, unit: "$", source: "Restaurant average", asOf: "2024" },
+        },
+      },
+      {
+        slug: "chicken-tikka-masala",
+        name: "Chicken Tikka Masala",
+        emoji: "🍛",
+        tags: ["food"],
+        facts: {
+          calories: { value: 550, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 15, unit: "$", source: "Restaurant average", asOf: "2024" },
+        },
+      },
+      {
+        slug: "waffle-house-waffle",
+        name: "Waffle House Waffle",
+        emoji: "🧇",
+        tags: ["food"],
+        facts: {
+          calories: { value: 410, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 4.50, unit: "$", source: "Waffle House menu", asOf: "2024" },
+        },
+      },
+      {
+        slug: "five-guys-burger",
+        name: "Five Guys Burger",
+        emoji: "🍔",
+        tags: ["food"],
+        facts: {
+          calories: { value: 840, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 9.79, unit: "$", source: "Five Guys menu", asOf: "2024" },
+        },
+      },
+      {
+        slug: "chilis-baby-back-ribs",
+        name: "Chili's Baby Back Ribs",
+        emoji: "🍖",
+        tags: ["food"],
+        facts: {
+          calories: { value: 1320, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 18, unit: "$", source: "Chili's menu", asOf: "2024" },
+        },
+      },
+      {
+        slug: "greek-yogurt-cup",
+        name: "Greek Yogurt Cup",
+        emoji: "🥛",
+        tags: ["food"],
+        facts: {
+          calories: { value: 150, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 1.50, unit: "$", source: "Grocery store average", asOf: "2024" },
+        },
+      },
+      {
+        slug: "oreo-pack-15",
+        name: "Oreo Pack (15)",
+        emoji: "🍪",
+        tags: ["food"],
+        facts: {
+          calories: { value: 960, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 4.29, unit: "$", source: "Grocery store average", asOf: "2024" },
+        },
+      },
+      {
+        slug: "hot-pocket",
+        name: "Hot Pocket",
+        emoji: "🫓",
+        tags: ["food"],
+        facts: {
+          calories: { value: 290, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 2.50, unit: "$", source: "Grocery store average", asOf: "2024" },
+        },
+      },
+      {
+        slug: "lunchable",
+        name: "Lunchable",
+        emoji: "🧀",
+        tags: ["food"],
+        facts: {
+          calories: { value: 310, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 3.99, unit: "$", source: "Grocery store average", asOf: "2024" },
+        },
+      },
+      {
+        slug: "instant-ramen-pack",
+        name: "Instant Ramen Pack",
+        emoji: "🍜",
+        tags: ["food"],
+        facts: {
+          calories: { value: 380, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 0.50, unit: "$", source: "Grocery store average", asOf: "2024" },
+        },
+      },
+      {
+        slug: "protein-bar",
+        name: "Protein Bar",
+        emoji: "💪",
+        tags: ["food"],
+        facts: {
+          calories: { value: 210, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 2.99, unit: "$", source: "Grocery store average", asOf: "2024" },
+        },
+      },
+      {
+        slug: "smoothie-king-smoothie",
+        name: "Smoothie King Smoothie",
+        emoji: "🥤",
+        tags: ["food"],
+        facts: {
+          calories: { value: 450, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 7.99, unit: "$", source: "Smoothie King menu", asOf: "2024" },
+        },
+      },
+      {
+        slug: "churro",
+        name: "Churro",
+        emoji: "🥖",
+        tags: ["food"],
+        facts: {
+          calories: { value: 240, unit: "cal", source: "USDA FoodData Central", asOf: "2024" },
+          average_price: { value: 3.00, unit: "$", source: "Street vendor average", asOf: "2024" },
+        },
+      },
     ];
 
     // --- COUNTRIES (population) ---  [21 items]
