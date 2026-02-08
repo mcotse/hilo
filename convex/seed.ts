@@ -1,12 +1,12 @@
 import { internalMutation } from "./_generated/server";
 
 /**
- * Seed script: migrates all 442 items and 12 categories from the legacy
+ * Seed script: migrates all 441 items and 12 categories from the legacy
  * static data files into the Convex database.
  *
  * Run with:  npx convex run seed
  *
- * Idempotent -- skips insertion when rows already exist.
+ * Idempotent -- upserts by slug/metricKey so re-runs update existing rows.
  */
 export default internalMutation({
   args: {},
@@ -99,7 +99,7 @@ export default internalMutation({
       },
       {
         label: "Spotify Monthly Listeners",
-        question: "Who gets more streams?",
+        question: "Who has more monthly listeners?",
         metricKey: "spotify_monthly_listeners",
         color: "#1db954",
         unit: "listeners",
@@ -135,38 +135,28 @@ export default internalMutation({
       },
     ];
 
-    // Check idempotency -- if any category already exists, skip all.
-    const existingCategory = await ctx.db
-      .query("categories")
-      .first();
-
+    // Upsert categories by metricKey (truly idempotent).
     let categoriesInserted = 0;
-    if (existingCategory) {
-      console.log("Categories already seeded -- skipping.");
-    } else {
-      for (const cat of categoryData) {
-        await ctx.db.insert("categories", {
-          ...cat,
-          enabled: true,
-        });
+    let categoriesUpdated = 0;
+    for (const cat of categoryData) {
+      const existing = await ctx.db
+        .query("categories")
+        .withIndex("by_metricKey", (q) => q.eq("metricKey", cat.metricKey))
+        .first();
+      if (existing) {
+        await ctx.db.patch(existing._id, { ...cat, enabled: true });
+        categoriesUpdated++;
+      } else {
+        await ctx.db.insert("categories", { ...cat, enabled: true });
         categoriesInserted++;
       }
-      console.log(`Inserted ${categoriesInserted} categories.`);
     }
+    console.log(`Categories: ${categoriesInserted} inserted, ${categoriesUpdated} updated.`);
 
     // ---------------------------------------------------------------
     // 2. ITEMS + FACTS
     // ---------------------------------------------------------------
-    // Check idempotency -- if any item already exists, skip all.
-    const existingItem = await ctx.db
-      .query("items")
-      .first();
-
-    if (existingItem) {
-      console.log("Items already seeded -- skipping.");
-      console.log("Seed complete (idempotent, no new data).");
-      return;
-    }
+    // Items are upserted by slug (truly idempotent).
 
     // Helper type for seed data
     type SeedItem = {
@@ -180,7 +170,7 @@ export default internalMutation({
       >;
     };
 
-    // --- FOOD / RESTAURANT ITEMS (calories + price) ---  [20 items]
+    // --- FOOD / RESTAURANT ITEMS (calories + price) ---  [40 items]
     const foodItems: SeedItem[] = [
       {
         slug: "big-mac",
@@ -584,7 +574,7 @@ export default internalMutation({
       },
     ];
 
-    // --- COUNTRIES (population) ---  [21 items]
+    // --- COUNTRIES (population) ---  [45 items]
     const countryItems: SeedItem[] = [
       {
         slug: "china",
@@ -1083,7 +1073,7 @@ export default internalMutation({
       },
     ];
 
-    // --- MOVIES (rotten_tomatoes) ---  [25 items]
+    // --- MOVIES (rotten_tomatoes) ---  [50 items]
     const movieItems: SeedItem[] = [
       {
         slug: "the-shawshank-redemption",
@@ -1587,7 +1577,7 @@ export default internalMutation({
       },
     ];
 
-    // --- ANIMALS -- TOP SPEED ---  [43 items]
+    // --- ANIMALS -- TOP SPEED ---  [54 items]
     const animalItems: SeedItem[] = [
       {
         slug: "cheetah",
@@ -1623,15 +1613,6 @@ export default internalMutation({
         tags: ["animal"],
         facts: {
           top_speed: { value: 35, unit: "mph", source: "National Geographic", asOf: "2024" },
-        },
-      },
-      {
-        slug: "usain-bolt",
-        name: "Usain Bolt",
-        emoji: "\u{1F3C3}",
-        tags: ["animal"],
-        facts: {
-          top_speed: { value: 28, unit: "mph", source: "World Athletics", asOf: "2024" },
         },
       },
       {
@@ -2086,7 +2067,7 @@ export default internalMutation({
       },
     ];
 
-    // --- MONEY / AVERAGE PRICE ---  [42 items]
+    // --- MONEY / AVERAGE PRICE ---  [60 items]
     const productItems: SeedItem[] = [
       {
         slug: "iphone-16-pro",
@@ -3286,6 +3267,7 @@ export default internalMutation({
       instagram_followers: { value: 12000000, unit: "followers", source: "Instagram", asOf: "2024" },
       career_points: { value: 23, unit: "points", source: "World Athletics", asOf: "2024" },
       annual_salary: { value: 20000000, unit: "$", source: "Forbes", asOf: "2024" },
+      top_speed: { value: 28, unit: "mph", source: "World Athletics", asOf: "2024" },
       },
       },
       {
@@ -4641,39 +4623,76 @@ export default internalMutation({
     console.log(`Seeding ${allItems.length} items...`);
 
     let itemsInserted = 0;
+    let itemsUpdated = 0;
     let factsInserted = 0;
+    let factsUpdated = 0;
 
     for (const item of allItems) {
-      // Insert item
-      const itemId = await ctx.db.insert("items", {
-        name: item.name,
-        slug: item.slug,
-        emoji: item.emoji,
-        tags: item.tags,
-        createdAt: now,
-        updatedAt: now,
-      });
-      itemsInserted++;
+      // Upsert item by slug
+      const existing = await ctx.db
+        .query("items")
+        .withIndex("by_slug", (q) => q.eq("slug", item.slug))
+        .first();
 
-      // Insert each fact for this item
-      for (const [metricKey, fact] of Object.entries(item.facts)) {
-        await ctx.db.insert("facts", {
-          itemId,
-          metricKey,
-          value: fact.value,
-          unit: fact.unit,
-          source: fact.source,
-          asOf: fact.asOf,
-          status: "verified",
+      let itemId;
+      if (existing) {
+        await ctx.db.patch(existing._id, {
+          name: item.name,
+          emoji: item.emoji,
+          tags: item.tags,
+          updatedAt: now,
+        });
+        itemId = existing._id;
+        itemsUpdated++;
+      } else {
+        itemId = await ctx.db.insert("items", {
+          name: item.name,
+          slug: item.slug,
+          emoji: item.emoji,
+          tags: item.tags,
           createdAt: now,
           updatedAt: now,
         });
-        factsInserted++;
+        itemsInserted++;
+      }
+
+      // Upsert each fact by itemId + metricKey
+      for (const [metricKey, fact] of Object.entries(item.facts)) {
+        const existingFact = await ctx.db
+          .query("facts")
+          .withIndex("by_item_metric", (q) =>
+            q.eq("itemId", itemId).eq("metricKey", metricKey)
+          )
+          .first();
+
+        if (existingFact) {
+          await ctx.db.patch(existingFact._id, {
+            value: fact.value,
+            unit: fact.unit,
+            source: fact.source,
+            asOf: fact.asOf,
+            updatedAt: now,
+          });
+          factsUpdated++;
+        } else {
+          await ctx.db.insert("facts", {
+            itemId,
+            metricKey,
+            value: fact.value,
+            unit: fact.unit,
+            source: fact.source,
+            asOf: fact.asOf,
+            status: "verified",
+            createdAt: now,
+            updatedAt: now,
+          });
+          factsInserted++;
+        }
       }
     }
 
     console.log(
-      `Seed complete: ${categoriesInserted} categories, ${itemsInserted} items, ${factsInserted} facts inserted.`
+      `Seed complete: categories(+${categoriesInserted} ~${categoriesUpdated}), items(+${itemsInserted} ~${itemsUpdated}), facts(+${factsInserted} ~${factsUpdated}).`
     );
   },
 });
