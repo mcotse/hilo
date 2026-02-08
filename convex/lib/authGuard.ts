@@ -1,4 +1,4 @@
-import { GenericQueryCtx, GenericMutationCtx, GenericDataModel } from "convex/server";
+import type { GenericQueryCtx, GenericMutationCtx, GenericDataModel } from "convex/server";
 
 type Ctx<DataModel extends GenericDataModel = GenericDataModel> =
   | GenericQueryCtx<DataModel>
