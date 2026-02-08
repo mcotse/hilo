@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router'
-import { useAuth, SignIn, UserButton } from '@clerk/clerk-react'
+import { useAuth, useUser, SignIn, UserButton } from '@clerk/clerk-react'
 import { useIsMobile } from '@/hooks/useIsMobile'
 
 const navItems = [
@@ -13,6 +13,7 @@ const navItems = [
 
 export function AdminLayout() {
   const { isLoaded, isSignedIn } = useAuth()
+  const { user } = useUser()
   const isMobile = useIsMobile()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -28,6 +29,17 @@ export function AdminLayout() {
     return (
       <div className="flex min-h-screen items-center justify-center bg-neutral-950">
         <SignIn routing="hash" />
+      </div>
+    )
+  }
+
+  if (user?.publicMetadata?.role !== 'admin') {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-neutral-950 text-white">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-2">Access Denied</h1>
+          <p className="text-white/50">You do not have admin privileges.</p>
+        </div>
       </div>
     )
   }
