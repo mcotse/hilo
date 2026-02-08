@@ -393,6 +393,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 1425000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 3705407, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 5.3, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -402,6 +404,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 1441000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 1269219, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 4.8, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -411,6 +415,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 340000000, unit: "people", source: "US Census Bureau", asOf: "2024" },
+          area: { value: 3796742, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 7.0, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -420,6 +426,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 278000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 735358, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 5.4, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -429,6 +437,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 216000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 3287956, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 5.4, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -438,6 +448,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 124000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 145937, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 4.4, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -447,6 +459,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 84000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 137988, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 5.0, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -456,6 +470,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 68000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 94058, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 5.7, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -465,6 +481,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 66000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 248573, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 5.0, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -474,6 +492,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 59000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 116348, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 5.1, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -483,6 +503,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 52000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 38502, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 5.1, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -492,6 +514,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 41000000, unit: "people", source: "Statistics Canada", asOf: "2024" },
+          area: { value: 3855103, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 6.0, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -501,6 +525,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 26000000, unit: "people", source: "ABS", asOf: "2024" },
+          area: { value: 2969907, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 5.7, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -510,6 +536,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 130000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 758449, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 4.9, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -519,6 +547,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 230000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 356669, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 4.2, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -528,6 +558,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 105000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 386662, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 4.5, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -537,6 +569,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 72000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 198117, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 5.7, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -546,6 +580,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 48000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 195124, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 5.3, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -555,6 +591,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 46000000, unit: "people", source: "UN World Population Prospects", asOf: "2024" },
+          area: { value: 1073518, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 5.2, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -564,6 +602,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 5200000, unit: "people", source: "Stats NZ", asOf: "2024" },
+          area: { value: 103483, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 5.5, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
       {
@@ -573,6 +613,8 @@ export default internalMutation({
         tags: ["country"],
         facts: {
           population: { value: 383000, unit: "people", source: "Statistics Iceland", asOf: "2024" },
+          area: { value: 39769, unit: "sq mi", source: "CIA World Factbook", asOf: "2024" },
+          screen_time_hours: { value: 6.5, unit: "hrs/day", source: "DataReportal Digital 2024", asOf: "2024" },
         },
       },
     ];
@@ -586,6 +628,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 91, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 1994, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -595,6 +638,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 94, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 2008, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -604,6 +648,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 92, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 1994, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -613,6 +658,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 71, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 1994, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -622,6 +668,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 93, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 1994, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -631,6 +678,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 88, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 1997, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -640,6 +688,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 93, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 1993, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -649,6 +698,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 83, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 1999, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -658,6 +708,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 79, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 1999, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -667,6 +718,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 87, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 2010, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -676,6 +728,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 100, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 1995, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -685,6 +738,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 99, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 2003, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -694,6 +748,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 91, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 2012, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -703,6 +758,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 90, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 2013, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -712,6 +768,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 93, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 1977, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -721,6 +778,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 97, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 1972, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -730,6 +788,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 97, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 1975, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -739,6 +798,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 29, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 2016, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -748,6 +808,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 20, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 2009, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -757,6 +818,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 49, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 2008, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -766,6 +828,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 19, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 2019, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -775,6 +838,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 88, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 2007, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -784,6 +848,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 99, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 2019, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -793,6 +858,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 98, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 2017, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
       {
@@ -802,6 +868,7 @@ export default internalMutation({
         tags: ["movie"],
         facts: {
           rotten_tomatoes: { value: 84, unit: "%", source: "Rotten Tomatoes", asOf: "2024" },
+          release_year: { value: 2004, unit: "year", source: "IMDb", asOf: "2024" },
         },
       },
     ];
@@ -1206,6 +1273,7 @@ export default internalMutation({
         tags: ["product"],
         facts: {
           average_price: { value: 1199, unit: "$", source: "Apple", asOf: "2024" },
+          release_year: { value: 2024, unit: "year", source: "Apple", asOf: "2024" },
         },
       },
       {
@@ -1215,6 +1283,7 @@ export default internalMutation({
         tags: ["product"],
         facts: {
           average_price: { value: 1999, unit: "$", source: "Apple", asOf: "2024" },
+          release_year: { value: 2023, unit: "year", source: "Apple", asOf: "2024" },
         },
       },
       {
@@ -1224,6 +1293,7 @@ export default internalMutation({
         tags: ["product"],
         facts: {
           average_price: { value: 38990, unit: "$", source: "Tesla", asOf: "2024" },
+          release_year: { value: 2017, unit: "year", source: "Tesla", asOf: "2024" },
         },
       },
       {
@@ -1314,6 +1384,7 @@ export default internalMutation({
         tags: ["product"],
         facts: {
           average_price: { value: 249, unit: "$", source: "Apple", asOf: "2024" },
+          release_year: { value: 2022, unit: "year", source: "Apple", asOf: "2024" },
         },
       },
       {
@@ -1323,6 +1394,7 @@ export default internalMutation({
         tags: ["product"],
         facts: {
           average_price: { value: 499, unit: "$", source: "Sony", asOf: "2024" },
+          release_year: { value: 2020, unit: "year", source: "Sony", asOf: "2024" },
         },
       },
       {
@@ -1332,6 +1404,7 @@ export default internalMutation({
         tags: ["product"],
         facts: {
           average_price: { value: 299, unit: "$", source: "Nintendo", asOf: "2024" },
+          release_year: { value: 2017, unit: "year", source: "Nintendo", asOf: "2024" },
         },
       },
       {
@@ -1548,6 +1621,7 @@ export default internalMutation({
         tags: ["product"],
         facts: {
           average_price: { value: 399, unit: "$", source: "GoPro", asOf: "2024" },
+          release_year: { value: 2024, unit: "year", source: "GoPro", asOf: "2024" },
         },
       },
       {
@@ -1575,6 +1649,7 @@ export default internalMutation({
         tags: ["product"],
         facts: {
           average_price: { value: 99, unit: "$", source: "Amazon", asOf: "2024" },
+          release_year: { value: 2007, unit: "year", source: "Amazon", asOf: "2024" },
         },
       },
     ];
