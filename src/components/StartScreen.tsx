@@ -3,9 +3,10 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 type StartScreenProps = {
   record: number
   onPlay: () => void
+  canPlay?: boolean
 }
 
-export function StartScreen({ record, onPlay }: StartScreenProps) {
+export function StartScreen({ record, onPlay, canPlay = true }: StartScreenProps) {
   const isMobile = useIsMobile()
 
   return (
@@ -71,6 +72,7 @@ export function StartScreen({ record, onPlay }: StartScreenProps) {
         {/* Play button */}
         <button
           onClick={onPlay}
+          disabled={!canPlay}
           className="cursor-pointer"
           style={{
             fontFamily: "'Bebas Neue', sans-serif",
@@ -84,6 +86,7 @@ export function StartScreen({ record, onPlay }: StartScreenProps) {
             transition: 'transform 0.15s ease, background 0.15s ease',
             WebkitTapHighlightColor: 'transparent',
             touchAction: 'manipulation',
+            opacity: canPlay ? 1 : 0.4,
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'scale(1.05)'

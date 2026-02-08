@@ -40,6 +40,7 @@ export function useGame(items: Item[], categories: Category[]) {
   }, [state.record])
 
   const startGame = useCallback(() => {
+    if (categories.length === 0 || items.length === 0) return
     // Pick a random category
     const category = categories[Math.floor(Math.random() * categories.length)]
     const pair = selectPair(items, category, 0, [])
