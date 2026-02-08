@@ -178,7 +178,7 @@ function App() {
   }
 
   if (state.phase === 'start') {
-    return <StartScreen record={state.record} onPlay={startGame} />
+    return <StartScreen record={state.record} onPlay={startGame} canPlay={categories.length > 0 && items.length > 0} />
   }
 
   if (!anchor || !challenger || !state.category) return null
