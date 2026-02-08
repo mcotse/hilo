@@ -12,7 +12,11 @@ const convex = new ConvexReactClient(env.VITE_CONVEX_URL)
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ClerkProvider publishableKey={env.VITE_CLERK_PUBLISHABLE_KEY}>
+    <ClerkProvider
+      publishableKey={env.VITE_CLERK_PUBLISHABLE_KEY}
+      signInFallbackRedirectUrl={import.meta.env.BASE_URL + 'admin'}
+      signUpFallbackRedirectUrl={import.meta.env.BASE_URL + 'admin'}
+    >
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <Router />
       </ConvexProviderWithClerk>
