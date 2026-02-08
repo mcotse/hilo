@@ -1,5 +1,6 @@
 import { query } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAdmin } from "./lib/authGuard";
 
 /**
  * Used by the game engine. Given a metricKey, returns all items that have
@@ -62,6 +63,7 @@ export const listByMetric = query({
 export const listAll = query({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     const items = await ctx.db.query("items").collect();
 
     return Promise.all(
