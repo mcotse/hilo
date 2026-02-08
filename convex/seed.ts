@@ -6,7 +6,7 @@ import { internalMutation } from "./_generated/server";
  *
  * Run with:  npx convex run seed
  *
- * Idempotent -- skips insertion when rows already exist.
+ * Idempotent -- upserts by slug/metricKey so re-runs update existing rows.
  */
 export default internalMutation({
   args: {},
@@ -72,38 +72,28 @@ export default internalMutation({
       },
     ];
 
-    // Check idempotency -- if any category already exists, skip all.
-    const existingCategory = await ctx.db
-      .query("categories")
-      .first();
-
+    // Upsert categories by metricKey (truly idempotent).
     let categoriesInserted = 0;
-    if (existingCategory) {
-      console.log("Categories already seeded -- skipping.");
-    } else {
-      for (const cat of categoryData) {
-        await ctx.db.insert("categories", {
-          ...cat,
-          enabled: true,
-        });
+    let categoriesUpdated = 0;
+    for (const cat of categoryData) {
+      const existing = await ctx.db
+        .query("categories")
+        .withIndex("by_metricKey", (q) => q.eq("metricKey", cat.metricKey))
+        .first();
+      if (existing) {
+        await ctx.db.patch(existing._id, { ...cat, enabled: true });
+        categoriesUpdated++;
+      } else {
+        await ctx.db.insert("categories", { ...cat, enabled: true });
         categoriesInserted++;
       }
-      console.log(`Inserted ${categoriesInserted} categories.`);
     }
+    console.log(`Categories: ${categoriesInserted} inserted, ${categoriesUpdated} updated.`);
 
     // ---------------------------------------------------------------
     // 2. ITEMS + FACTS
     // ---------------------------------------------------------------
-    // Check idempotency -- if any item already exists, skip all.
-    const existingItem = await ctx.db
-      .query("items")
-      .first();
-
-    if (existingItem) {
-      console.log("Items already seeded -- skipping.");
-      console.log("Seed complete (idempotent, no new data).");
-      return;
-    }
+    // Items are upserted by slug (truly idempotent).
 
     // Helper type for seed data
     type SeedItem = {
@@ -1528,39 +1518,76 @@ export default internalMutation({
     console.log(`Seeding ${allItems.length} items...`);
 
     let itemsInserted = 0;
+    let itemsUpdated = 0;
     let factsInserted = 0;
+    let factsUpdated = 0;
 
     for (const item of allItems) {
-      // Insert item
-      const itemId = await ctx.db.insert("items", {
-        name: item.name,
-        slug: item.slug,
-        emoji: item.emoji,
-        tags: item.tags,
-        createdAt: now,
-        updatedAt: now,
-      });
-      itemsInserted++;
+      // Upsert item by slug
+      const existing = await ctx.db
+        .query("items")
+        .withIndex("by_slug", (q) => q.eq("slug", item.slug))
+        .first();
 
-      // Insert each fact for this item
-      for (const [metricKey, fact] of Object.entries(item.facts)) {
-        await ctx.db.insert("facts", {
-          itemId,
-          metricKey,
-          value: fact.value,
-          unit: fact.unit,
-          source: fact.source,
-          asOf: fact.asOf,
-          status: "verified",
+      let itemId;
+      if (existing) {
+        await ctx.db.patch(existing._id, {
+          name: item.name,
+          emoji: item.emoji,
+          tags: item.tags,
+          updatedAt: now,
+        });
+        itemId = existing._id;
+        itemsUpdated++;
+      } else {
+        itemId = await ctx.db.insert("items", {
+          name: item.name,
+          slug: item.slug,
+          emoji: item.emoji,
+          tags: item.tags,
           createdAt: now,
           updatedAt: now,
         });
-        factsInserted++;
+        itemsInserted++;
+      }
+
+      // Upsert each fact by itemId + metricKey
+      for (const [metricKey, fact] of Object.entries(item.facts)) {
+        const existingFact = await ctx.db
+          .query("facts")
+          .withIndex("by_item_metric", (q) =>
+            q.eq("itemId", itemId).eq("metricKey", metricKey)
+          )
+          .first();
+
+        if (existingFact) {
+          await ctx.db.patch(existingFact._id, {
+            value: fact.value,
+            unit: fact.unit,
+            source: fact.source,
+            asOf: fact.asOf,
+            updatedAt: now,
+          });
+          factsUpdated++;
+        } else {
+          await ctx.db.insert("facts", {
+            itemId,
+            metricKey,
+            value: fact.value,
+            unit: fact.unit,
+            source: fact.source,
+            asOf: fact.asOf,
+            status: "verified",
+            createdAt: now,
+            updatedAt: now,
+          });
+          factsInserted++;
+        }
       }
     }
 
     console.log(
-      `Seed complete: ${categoriesInserted} categories, ${itemsInserted} items, ${factsInserted} facts inserted.`
+      `Seed complete: categories(+${categoriesInserted} ~${categoriesUpdated}), items(+${itemsInserted} ~${itemsUpdated}), facts(+${factsInserted} ~${factsUpdated}).`
     );
   },
 });
